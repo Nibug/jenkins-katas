@@ -1,28 +1,5 @@
 pipeline {
   agent any
-  stages {
-    stage('Say Hello') {
-      parallel {
-        stage('Parallel execution') {
-          steps {
-            sh 'echo "hello world"'
-          }
-        }
-
-        stage('build app') {
-          agent {
-            docker {
-              image 'gradle:jdk11'
-            }
-
-          }
-          steps {
-            sh 'ci/build-app.sh'
-            archiveArtifacts 'app/build/libs/'
-          }
-        }
-apipeline {
-  agent any
   environment {
       docker_username = 'nibug18'
   }
@@ -95,9 +72,4 @@ apipeline {
         }
       }
     } 
-}
-      }
-    }
-
-  }
 }
