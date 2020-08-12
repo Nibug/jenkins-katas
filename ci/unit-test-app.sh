@@ -1,2 +1,2 @@
 #! /bin/bash
-gradle clean test -p app
+gradle clean test -p a
