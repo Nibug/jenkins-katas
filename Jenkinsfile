@@ -80,8 +80,7 @@ pipeline {
       }
       steps {
         unstash 'code'
-        sh 'component-test/docker build --name test .'
-        sh 'component-test/docker run file'
+        sh 'ci/component-test.sh'
       }
     }
   } 
