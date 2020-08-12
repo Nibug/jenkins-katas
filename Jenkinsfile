@@ -80,7 +80,7 @@ pipeline {
       }
       steps {
         unstash 'code'
-        sh 'component-test/docker-compose up -d'
+        sh 'component-test/docker-compose up'
       }
     }
   } 
