@@ -56,20 +56,23 @@ pipeline {
     }
 
     stage('push docker app') {
-        options {
-          skipDefaultCheckout(true)
-        }
-
-        environment {
-          DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
-        }
-
-        steps {
-          unstash 'code'
-          sh 'ci/build-docker.sh'
-          sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
-          sh 'ci/push-docker.sh'
-        }
+      when { not { branch 'dev/' } }
+      options {
+        skipDefaultCheckout(true)
       }
-    } 
+
+      environment {
+        DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
+      }
+
+      steps {
+        unstash 'code'
+        sh 'ci/build-docker.sh'
+        sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
+        sh 'ci/push-docker.sh'
+      }
+    }
+
+      stage()
+  } 
 }
