@@ -56,7 +56,7 @@ pipeline {
     }
 
     stage('push docker app') {
-      when { not { branch 'dev/' } }
+      when { branch 'master' }
       options {
         skipDefaultCheckout(true)
       }
@@ -71,6 +71,14 @@ pipeline {
         sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
         sh 'ci/push-docker.sh'
       }
+    }
+
+    stage('component test') {
+      when { not { branch 'dev/' } }
+      options {
+        skipDefaultCheckout(true)
+      }
+      sh 'component-test/docker-compose up -d'
     }
   } 
 }
