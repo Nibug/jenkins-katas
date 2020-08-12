@@ -78,7 +78,9 @@ pipeline {
       options {
         skipDefaultCheckout(true)
       }
-      sh 'component-test/docker-compose up -d'
+      steps {
+        sh 'component-test/docker-compose up -d'
+      }
     }
   } 
 }
