@@ -79,6 +79,7 @@ pipeline {
         skipDefaultCheckout(true)
       }
       steps {
+        unstash 'code'
         sh 'component-test/docker-compose up -d'
       }
     }
