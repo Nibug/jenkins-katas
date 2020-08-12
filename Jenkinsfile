@@ -72,7 +72,5 @@ pipeline {
         sh 'ci/push-docker.sh'
       }
     }
-
-      stage()
   } 
 }
